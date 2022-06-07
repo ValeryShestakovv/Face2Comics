@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
+        imageView.accessibilityIdentifier = "logo"
         return imageView
     }()
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var imageView = UIImageView()
         imageView.image = UIImage(named: "default_image")!.roundImage(radius: 10)
         imageView.contentMode = .scaleAspectFit
+        imageView.accessibilityIdentifier = "default_image"
         return imageView
     }()
     
@@ -180,15 +182,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         outputImageView.isHidden = false
         buttonSaveImage.isEnabled = true
         buttonGenerate.isEnabled = false
-        analyzeImage(image: inputImageView.image)
+        outputImageView.image = analyzeImage(image: inputImageView.image).roundImage(radius: 10)!
     }
     
 
-    private func analyzeImage(image: UIImage?) {
+    func analyzeImage(image: UIImage?) -> UIImage {
+        var resultImage = UIImage()
         guard let buffer = image?.getCVPixelBuffer() else {
-                    return
-                }
-        
+            return resultImage
+        }
         do {
             let config = MLModelConfiguration()
             let model = try model_coreml(configuration: config)
@@ -197,11 +199,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let output = try model.prediction(input: input)
             
             let ciImage = CIImage(cvPixelBuffer: output.var_385)
-            let resultImage = UIImage(ciImage: ciImage).roundImage(radius: 10)
-            outputImageView.image = resultImage
+            resultImage = UIImage(ciImage: ciImage)
         } catch {
             print(error.localizedDescription)
         }
+        return resultImage
     }
 }
 
