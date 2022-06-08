@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		559CD60B284F7A0700563F69 /* model_coreml.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 559CD60A284F7A0600563F69 /* model_coreml.mlmodel */; };
+		558011992850C543000F27DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558011982850C543000F27DD /* Extensions.swift */; };
 		559CD613284F7B1300563F69 /* MainScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CD612284F7B1300563F69 /* MainScreenUITests.swift */; };
 		559CD615284F7B1300563F69 /* GAN_for_IOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CD614284F7B1300563F69 /* GAN_for_IOSUITestsLaunchTests.swift */; };
 		559CD61D284F7E3A00563F69 /* ExtensionXCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CD61C284F7E3A00563F69 /* ExtensionXCTestCase.swift */; };
@@ -17,7 +17,6 @@
 		55A35EC127EA71BA0099D5DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EBF27EA71BA0099D5DD /* Main.storyboard */; };
 		55A35EC327EA71BD0099D5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EC227EA71BD0099D5DD /* Assets.xcassets */; };
 		55A35EC627EA71BD0099D5DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EC427EA71BD0099D5DD /* LaunchScreen.storyboard */; };
-		55A35ED227EA733E0099D5DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A35ED127EA733E0099D5DD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		559CD60A284F7A0600563F69 /* model_coreml.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = model_coreml.mlmodel; sourceTree = "<group>"; };
+		558011982850C543000F27DD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		559CD610284F7B1300563F69 /* GAN_for_IOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GAN_for_IOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		559CD612284F7B1300563F69 /* MainScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenUITests.swift; sourceTree = "<group>"; };
 		559CD614284F7B1300563F69 /* GAN_for_IOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAN_for_IOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 		55A35EC227EA71BD0099D5DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A35EC527EA71BD0099D5DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55A35EC727EA71BD0099D5DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55A35ED127EA733E0099D5DD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "../../CoreMLDemo-YT-main/CoreMLDemo/Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +126,7 @@
 		55A35EB827EA71BA0099D5DD /* GAN_for_IOS */ = {
 			isa = PBXGroup;
 			children = (
-				55A35ED127EA733E0099D5DD /* Extensions.swift */,
+				558011982850C543000F27DD /* Extensions.swift */,
 				55A35EB927EA71BA0099D5DD /* AppDelegate.swift */,
 				55A35EBB27EA71BA0099D5DD /* SceneDelegate.swift */,
 				55A35EBD27EA71BA0099D5DD /* ViewController.swift */,
@@ -136,7 +134,6 @@
 				55A35EC227EA71BD0099D5DD /* Assets.xcassets */,
 				55A35EC427EA71BD0099D5DD /* LaunchScreen.storyboard */,
 				55A35EC727EA71BD0099D5DD /* Info.plist */,
-				559CD60A284F7A0600563F69 /* model_coreml.mlmodel */,
 			);
 			path = GAN_for_IOS;
 			sourceTree = "<group>";
@@ -326,8 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				559CD60B284F7A0700563F69 /* model_coreml.mlmodel in Sources */,
-				55A35ED227EA733E0099D5DD /* Extensions.swift in Sources */,
+				558011992850C543000F27DD /* Extensions.swift in Sources */,
 				55A35EBE27EA71BA0099D5DD /* ViewController.swift in Sources */,
 				55A35EBA27EA71BA0099D5DD /* AppDelegate.swift in Sources */,
 				55A35EBC27EA71BA0099D5DD /* SceneDelegate.swift in Sources */,
