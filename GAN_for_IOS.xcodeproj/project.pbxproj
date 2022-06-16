@@ -17,6 +17,7 @@
 		55A35EC127EA71BA0099D5DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EBF27EA71BA0099D5DD /* Main.storyboard */; };
 		55A35EC327EA71BD0099D5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EC227EA71BD0099D5DD /* Assets.xcassets */; };
 		55A35EC627EA71BD0099D5DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A35EC427EA71BD0099D5DD /* LaunchScreen.storyboard */; };
+		55DE3169285BAF2F00C6B9EC /* model_coreml.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 55DE3166285BAF2F00C6B9EC /* model_coreml.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		55A35EC227EA71BD0099D5DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A35EC527EA71BD0099D5DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55A35EC727EA71BD0099D5DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55DE3166285BAF2F00C6B9EC /* model_coreml.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = model_coreml.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		55A35EB827EA71BA0099D5DD /* GAN_for_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				55DE3166285BAF2F00C6B9EC /* model_coreml.mlmodel */,
 				558011982850C543000F27DD /* Extensions.swift */,
 				55A35EB927EA71BA0099D5DD /* AppDelegate.swift */,
 				55A35EBB27EA71BA0099D5DD /* SceneDelegate.swift */,
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DE3169285BAF2F00C6B9EC /* model_coreml.mlmodel in Sources */,
 				558011992850C543000F27DD /* Extensions.swift in Sources */,
 				55A35EBE27EA71BA0099D5DD /* ViewController.swift in Sources */,
 				55A35EBA27EA71BA0099D5DD /* AppDelegate.swift in Sources */,

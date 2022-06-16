@@ -4,7 +4,7 @@
 ## Results
 ||
 |:---:|
-|![](results/results_anime.png)|
+|![](result.jpeg)|
 
 
 ### Model CoreML
