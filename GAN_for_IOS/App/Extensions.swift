@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImage {
-    
+
     func roundImage(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height)
         let cornerRadius: CGFloat
