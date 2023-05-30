@@ -2,14 +2,14 @@ import Foundation
 import UIKit
 
 final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    private var logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
         imageView.accessibilityIdentifier = "logo"
         return imageView
     }()
-    private var inputImageView: UIImageView = {
+    private lazy var inputImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 8
@@ -18,7 +18,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.accessibilityIdentifier = "default_image"
         return imageView
     }()
-    private let outputImageView: UIImageView = {
+    private lazy var outputImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 8
@@ -26,7 +26,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.image = UIImage(systemName: "photo")
         return imageView
     }()
-    private let buttonOpenLibrary: UIButton = {
+    private lazy var buttonOpenLibrary: UIButton = {
         let button = UIButton()
         button.setTitle("Choose Photo", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -35,7 +35,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         button.tintColor = .white
         return button
     }()
-    private let buttonSaveImage: UIButton = {
+    private lazy var buttonSaveImage: UIButton = {
         let button = UIButton()
         button.setTitle("Save Image", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -45,7 +45,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         button.isEnabled = false
         return button
     }()
-    private let buttonGenerate: UIButton = {
+    private lazy var buttonGenerate: UIButton = {
         let button = UIButton()
         button.setTitle("Ganerate Image", for: .normal)
         button.setTitleColor(.white, for: .normal)
