@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Lottie
 
 final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private lazy var logoImageView: UIImageView = {
@@ -9,7 +10,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.accessibilityIdentifier = "logo"
         return imageView
     }()
-    private lazy var inputImageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         var imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 8
@@ -18,14 +19,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.accessibilityIdentifier = "default_image"
         return imageView
     }()
-    private lazy var outputImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 8
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "photo")
-        return imageView
-    }()
+    private let loadingView = LottieAnimationView(name: "loading")
     private lazy var buttonOpenLibrary: UIButton = {
         let button = UIButton()
         button.setTitle("Choose Photo", for: .normal)
@@ -73,16 +67,16 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     private func createIU() {
         view.addSubview(logoImageView)
-        view.addSubview(inputImageView)
-        view.addSubview(outputImageView)
+        view.addSubview(imageView)
+        view.addSubview(loadingView)
         view.addSubview(buttonGenerate)
         view.addSubview(buttonOpenLibrary)
         view.addSubview(buttonSaveImage)
-        outputImageView.isHidden = true
+//        loadingView.isHidden = true
 
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        inputImageView.translatesAutoresizingMaskIntoConstraints = false
-        outputImageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
         buttonGenerate.translatesAutoresizingMaskIntoConstraints = false
         buttonOpenLibrary.translatesAutoresizingMaskIntoConstraints = false
         buttonSaveImage.translatesAutoresizingMaskIntoConstraints = false
@@ -92,17 +86,17 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         logoImageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: view.frame.height / 5).isActive = true
 
-        inputImageView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 25).isActive = true
-        inputImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inputImageView.widthAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
-        inputImageView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
+        imageView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 25).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
 
-        outputImageView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 20).isActive = true
-        outputImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        outputImageView.widthAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
-        outputImageView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
+        loadingView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 20).isActive = true
+        loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingView.widthAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
+        loadingView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
 
-        buttonGenerate.topAnchor.constraint(equalTo: inputImageView.bottomAnchor, constant: 20).isActive = true
+        buttonGenerate.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
         buttonGenerate.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         buttonGenerate.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         buttonGenerate.heightAnchor.constraint(equalToConstant: view.frame.height / 15).isActive = true
@@ -118,7 +112,7 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
         buttonSaveImage.heightAnchor.constraint(equalToConstant: view.frame.height / 15).isActive = true
     }
     @objc private func saveImage() {
-        guard let image = outputImageView.image else {
+        guard let image = imageView.image else {
             return
         }
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(alertSaveImageToAlbum(_ :didFinishSavingWithError:contextInfo:)), nil)
@@ -161,28 +155,36 @@ final class MainView: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        inputImageView.image = image.resize(size: CGSize(width: 256, height: 256))
-        inputImageView.isHidden = false
-        outputImageView.isHidden = true
+        imageView.image = image.resize(size: CGSize(width: 256, height: 256))
         buttonGenerate.isEnabled = true
         dismiss(animated: true, completion: nil)
     }
     @objc func imageGanerate() {
-        inputImageView.isHidden = true
-        outputImageView.isHidden = false
-        buttonSaveImage.isEnabled = true
-        buttonGenerate.isEnabled = false
-        guard let image = analyzeImage(image: inputImageView.image) else {
+        loadingView.play()
+        UIView.animate(withDuration: 0.5) {
+            self.buttonSaveImage.isEnabled = true
+            self.buttonGenerate.isEnabled = false
+            self.imageView.alpha = 0
+        }
+        analyzeImage(image: imageView.image)
+    }
+    func analyzeImage(image: UIImage?) {
+        guard let buffer = image?.getCVPixelBuffer() else {
             return
         }
-        outputImageView.image = image.roundImage(radius: 10)
-    }
-    func analyzeImage(image: UIImage?) -> UIImage? {
-        guard let buffer = image?.getCVPixelBuffer(),
-              let predictImage = viewModel.analyzeImage(imageBuffer: buffer) else {
-            return nil
+        viewModel.analyzeImage(imageBuffer: buffer) { [weak self] predictImage in
+            guard
+                let self = self,
+                let image = predictImage else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(ciImage: image).roundImage(radius: 10)
+                UIView.animate(withDuration: 0.5) {
+                    self.imageView.alpha = 1
+                    self.loadingView.stop()
+                }
+            }
         }
-        let resultImage = UIImage(ciImage: predictImage)
-        return resultImage
     }
 }
